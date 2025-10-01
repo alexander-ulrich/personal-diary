@@ -37,7 +37,7 @@ const App = () => {
   }, []);
 
   return (
-    <body>
+    <div>
       <Header setTheme={setTheme} />
       <div className="flex flex-col items-center max-w-[1400px]">
         <h1 className="text-3xl font-bold underline">Personal Diary</h1>
@@ -56,7 +56,7 @@ const App = () => {
             ))}
         </div>
       </div>
-    </body>
+    </div>
   );
 };
 

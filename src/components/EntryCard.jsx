@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DetailsModal from "./DetailsModal";
 
-export default function EntryCard({ entry }) {
+export function EntryCard({ entry }) {
   const [showDetails, setShowDetails] = useState(false);
   let detailsEl = document?.getElementById(entry.date);
   useEffect(() => {

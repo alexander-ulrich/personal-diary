@@ -5,9 +5,9 @@ import {
 } from "./utils/localStorageData";
 import Header from "./components/Header";
 import AddEntryModal from "./components/AddEntryModal";
-import EntryCard from "./components/entryCard";
+import { EntryCard } from "./components/EntryCard";
 
-const App = () => {
+function App() {
   const modalEl = document.getElementById("addEntryModal");
   const [showEntryModal, setShowEntryModal] = useState(false);
   const [entries, setEntries] = useState([]);
@@ -58,6 +58,6 @@ const App = () => {
       </div>
     </div>
   );
-};
+}
 
 export default App;

@@ -7,28 +7,35 @@ import {
 
 async function action(_prevState, formData) {
   const data = Object.fromEntries(formData);
-  const validationErrors = validate(data);
-
+  const validationErrors = await validate(data);
+  await sleep(1000);
   if (Object.keys(validationErrors).length === 0) {
-    await sleep(2000);
     console.log("Submitted:", data);
-    // setShowEntryModal(false);
-
-    return data;
+    alert("Diary Entry added successfully!");
+    return { errors: null, input: data };
   }
   return { errors: validationErrors, input: data };
 }
 
 export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
-  const [state, formAction, isPending] = useActionState(action, null);
+  const [state, formAction, isPending] = useActionState(action, {
+    errors: null,
+    input: null,
+  });
 
   useEffect(() => {
-    const diary = getLocalStorageData("diary") ?? [];
-    if (state) {
-      setLocalStorageData("diary", [state, ...diary]);
-      setShowEntryModal(false);
+    async function saveData() {
+      const diary = (await getLocalStorageData("diary")) ?? [];
+      console.log("State of erros: " + state.errors);
+
+      if (state.errors === null && state.input !== null) {
+        setLocalStorageData("diary", [state?.input, ...diary]);
+        setShowEntryModal(false);
+      }
     }
+    saveData();
   }, [state]);
+
   function onX(e) {
     e.preventDefault();
     console.log(showEntryModal);
@@ -50,6 +57,7 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
             <label htmlFor="title">
               <h2>Title</h2>
               <input
+                defaultValue={state.input?.title}
                 disabled={isPending}
                 className="input input-primary"
                 type="text"
@@ -57,9 +65,15 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
                 id="title"
               />
             </label>
+            {state.errors?.title && (
+              <p className="text-red-600 mt-1 font-semibold">
+                {state.errors.title}
+              </p>
+            )}
             <label htmlFor="date">
               <h2>Date</h2>
               <input
+                defaultValue={state.input?.date}
                 disabled={isPending}
                 className="input input-primary"
                 type="date"
@@ -67,9 +81,20 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
                 id="date"
               />
             </label>
+            {state.errors?.date && (
+              <p className="text-red-600 font-semibold">{state.errors.date}</p>
+            )}
+            {state.errors?.duplicate && (
+              <p className="text-green-600 font-semibold">
+                {state.errors.duplicate}
+              </p>
+            )}
             <label htmlFor="img">
               <h2>Image URL</h2>
               <input
+                defaultValue={
+                  state.input?.img || "https://picsum.photos/600/200"
+                }
                 type="text"
                 disabled={isPending}
                 className="input input-primary"
@@ -77,10 +102,18 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
                 id="img"
               />
             </label>
+            {state.errors?.img && (
+              <p className="text-red-600 font-semibold">{state.errors.img}</p>
+            )}
             <label htmlFor="content">
               <h2>Entry</h2>
               <textarea
-                className="block mb-20 textarea textarea-primary"
+                defaultValue={state.input?.content}
+                className={
+                  !state.errors?.content
+                    ? "block textarea textarea-primary mb-20"
+                    : "block textarea textarea-primary"
+                }
                 disabled={isPending}
                 name="content"
                 id="content"
@@ -88,7 +121,12 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
                 placeholder="What did you do today?"
               ></textarea>
             </label>
-            {/* if there is a button in form, it will close the modal */}
+            {state.errors?.content && (
+              <p className="text-red-600 font-semibold mb-20">
+                {state.errors.content}
+              </p>
+            )}
+
             <button
               disabled={isPending}
               type="submit"

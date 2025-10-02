@@ -12,7 +12,7 @@ function App() {
   const modalEl = document.getElementById("addEntryModal");
   const [showEntryModal, setShowEntryModal] = useState(false);
   const [entries, setEntries] = useState([]);
-  const [theme, setTheme] = useState(getLocalStorageData("theme") ?? "default");
+
   useEffect(() => {
     console.log("Show EntryModal? " + showEntryModal);
     if (!showEntryModal) {
@@ -26,20 +26,14 @@ function App() {
       fetchEntries();
     }
   }, [showEntryModal]);
-  useEffect(() => {
-    setLocalStorageData("theme", theme);
-    // setTheme(document.querySelector('html').getAttribute('data-theme'));
-  }, [theme]);
 
   useEffect(() => {
     setEntries(getLocalStorageData("diary") ?? []);
-
-    document.querySelector("html").setAttribute("data-theme", theme);
   }, []);
 
   return (
     <div>
-      <Header setTheme={setTheme} />
+      <Header />
       <div className="flex flex-col items-center max-w-[1400px]">
         <h1 className="text-3xl font-bold underline">Personal Diary</h1>
         <button className="btn my-15" onClick={() => setShowEntryModal(true)}>

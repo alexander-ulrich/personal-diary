@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, retro, valentine, cyberpunk, aqua;
+  themes: light, dark --prefersdark, retro, valentine, cyberpunk, aqua --default;
 }
 :root {
   /* Five light colors that read well on black */
@@ -18,6 +18,7 @@
 }
 * {
   box-sizing: border-box;
+  font-family: Verdana;
 }
 body {
   margin: auto;
@@ -30,7 +31,7 @@ h1 {
   text-align: center;
   font-size: 4rem;
   animation: dark-color-change 20s linear infinite;
-  animation-delay: 2s;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-shadow: 2px 2px black;
@@ -74,7 +75,7 @@ h2 {
 }
 
 .hoverShine:hover {
-  box-shadow: 1px 1px 5px 2px rgba(255, 255, 255, 0.5);
+  /* box-shadow: 1px 1px 5px 2px rgba(255, 255, 255, 0.5); */
 }
 
 .hoverShine:hover::before {
@@ -176,7 +177,7 @@ h2 {
 /* linear color transition animation Dark Colors */
 @keyframes dark-color-change {
   0% {
-    color: whitesmoke;
+    color: var(--d5);
   }
   20% {
     color: var(--d1);

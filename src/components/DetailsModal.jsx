@@ -4,8 +4,11 @@ export default function DetailsModal({ entry, setShowDetails, showDetails }) {
     setShowDetails(!showDetails);
   }
   return (
-    <dialog id={entry.date} className="modal">
-      <div className="modal-box flex flex-col w-fit px-15 max-w-[80vw]">
+    <dialog
+      id={entry.date}
+      className="modal transition ease-in-out duration-400"
+    >
+      <div className="modal-box flex flex-col w-fit px-5 max-w-[80vw]">
         <button
           onClick={(e) => onClick(e)}
           className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -13,7 +16,7 @@ export default function DetailsModal({ entry, setShowDetails, showDetails }) {
           ✕
         </button>
         <h2>Diary Entry</h2>
-        <div className="w-full">
+        <div>
           <figure>
             <img
               className="object-contain rounded shadow-sm"
@@ -22,7 +25,7 @@ export default function DetailsModal({ entry, setShowDetails, showDetails }) {
             />
           </figure>
         </div>
-        <h3>
+        <h3 className="text-sm pt-2">
           {new Date(entry.date).toLocaleDateString("en-US", {
             weekday: "long",
             year: "numeric",
@@ -30,7 +33,7 @@ export default function DetailsModal({ entry, setShowDetails, showDetails }) {
             day: "numeric",
           })}
         </h3>
-        <h2>{entry.title}</h2>
+        <h2 className="pt-2">{entry.title}</h2>
         <div className="overflow-auto">
           <textarea
             className="w-full resize-none"

@@ -44,10 +44,10 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
   }
 
   return (
-    <dialog id="addEntryModal" className="modal">
-      <div className="modal-box w-fit px-15">
+    <dialog id="addEntryModal" className="modal ">
+      <div className="modal-box min-w-[60vw] place-items-center">
         <h3 className="font-bold text-lg">Enter a new Diary Entry</h3>
-        <div className="modal-action justify-start">
+        <div className="modal-action w-full justify-center">
           <form action={formAction}>
             <button
               onClick={(e) => onX(e)}
@@ -60,7 +60,7 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
               <input
                 defaultValue={state.input?.title}
                 disabled={isPending}
-                className="input input-primary"
+                className="input input-primary w-[50vw]"
                 type="text"
                 name="title"
                 id="title"
@@ -76,7 +76,7 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
               <input
                 defaultValue={state.input?.date}
                 disabled={isPending}
-                className="input input-primary"
+                className="input input-primary w-[50vw]"
                 type="date"
                 name="date"
                 id="date"
@@ -98,7 +98,7 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
                 }
                 type="text"
                 disabled={isPending}
-                className="input input-primary"
+                className="input input-primary w-[50vw]"
                 name="img"
                 id="img"
               />
@@ -112,8 +112,8 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
                 defaultValue={state.input?.content}
                 className={
                   !state.errors?.content
-                    ? "block textarea textarea-primary mb-15"
-                    : "block textarea textarea-primary"
+                    ? "block textarea textarea-primary mb-15 w-[50vw]"
+                    : "block textarea textarea-primary w-[50vw]"
                 }
                 disabled={isPending}
                 name="content"

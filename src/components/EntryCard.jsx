@@ -15,18 +15,10 @@ export function EntryCard({ entry }) {
     <article>
       <div
         onClick={() => setShowDetails(!showDetails)}
-        className="card bg-base-300 shadow-md hover:scale-105 transition duration-400 ease-in-out mb-10 mx-10 hoverShine"
+        className="card bg-base-100 shadow-md transition duration-400 ease-in-out min-w-[60vw] mb-10 mx-10 hoverShine hover:scale-105 hover:cursor-pointer"
       >
-        <div className="hover:cursor-pointer">
-          <figure>
-            <img
-              className="object-contain w-full aspect-video rounded"
-              src={entry.img}
-              alt="EntryImage"
-            />
-          </figure>
-        </div>
         <div className="card-body">
+          <h2 className="card-title">{entry.title}</h2>
           <h3>
             {new Date(entry.date).toLocaleDateString("en-US", {
               weekday: "long",
@@ -35,8 +27,17 @@ export function EntryCard({ entry }) {
               day: "numeric",
             })}
           </h3>
-          <h2 className="card-title">{entry.title}</h2>
         </div>
+        <div className="">
+          <figure>
+            <img
+              className="object-contain w-full rounded"
+              src={entry.img}
+              alt="EntryImage"
+            />
+          </figure>
+        </div>
+
         <DetailsModal
           entry={entry}
           setShowDetails={setShowDetails}

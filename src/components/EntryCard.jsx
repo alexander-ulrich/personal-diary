@@ -27,7 +27,14 @@ export function EntryCard({ entry }) {
           </figure>
         </div>
         <div className="card-body">
-          <h3>{entry.date}</h3>
+          <h3>
+            {new Date(entry.date).toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </h3>
           <h2 className="card-title">{entry.title}</h2>
         </div>
         <DetailsModal

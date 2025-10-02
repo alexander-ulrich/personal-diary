@@ -15,7 +15,7 @@ export function EntryCard({ entry }) {
     <article>
       <div
         onClick={() => setShowDetails(!showDetails)}
-        className="card bg-base-300 shadow-md hover:scale-105 transition duration-400 ease-in-out mb-10 mx-10"
+        className="card bg-base-300 shadow-md hover:scale-105 transition duration-400 ease-in-out mb-10 mx-10 hoverShine"
       >
         <div className="hover:cursor-pointer">
           <figure>

@@ -131,7 +131,7 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
             <button
               disabled={isPending}
               type="submit"
-              className="btn absolute right-5 bottom-5"
+              className="btn bt absolute! right-5 bottom-5 hoverShine"
             >
               {isPending ? "Adding Entry..." : "Submit"}
             </button>

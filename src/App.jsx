@@ -3,6 +3,7 @@ import {
   getLocalStorageData,
   setLocalStorageData,
 } from "./utils/localStorageData";
+import { compareObject } from "./utils/compare";
 import Header from "./components/Header";
 import AddEntryModal from "./components/AddEntryModal";
 import { EntryCard } from "./components/EntryCard";
@@ -51,9 +52,10 @@ function App() {
         {showEntryModal ? modalEl.showModal() : null}
         <div id="content">
           {entries &&
-            entries?.map((entry) => (
-              <EntryCard key={entry.date} entry={entry} />
-            ))}
+            entries
+              ?.sort(compareObject)
+              .reverse()
+              .map((entry) => <EntryCard key={entry?.date} entry={entry} />)}
         </div>
       </div>
     </div>

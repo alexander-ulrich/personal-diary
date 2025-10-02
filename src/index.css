@@ -2,6 +2,20 @@
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark, retro, valentine, cyberpunk, aqua;
 }
+:root {
+  /* Five light colors that read well on black */
+  --l1: #a8ffeb; /* mint */
+  --l2: #ffd1a9; /* peach */
+  --l3: #fff59d; /* soft yellow */
+  --l4: #b8c9ff; /* periwinkle */
+  --l5: #ffb3dd; /* pink */
+
+  --d1: #1e3a8a; /* deep indigo */
+  --d2: #14532d; /* forest green */
+  --d3: #7f1d1d; /* dark brick red */
+  --d4: #4c1d95; /* royal purple */
+  --d5: #3e2723; /* espresso brown */
+}
 * {
   box-sizing: border-box;
 }
@@ -9,9 +23,195 @@ body {
   margin: auto;
   max-width: 1400px;
 }
+
+/* Fancy Heading */
+h1 {
+  background-color: transparent;
+  text-align: center;
+  font-size: 4rem;
+  animation: dark-color-change 20s linear infinite;
+  animation-delay: 2s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 2px 2px black;
+}
 h2 {
   margin-block: 5px;
   margin-bottom: 10px;
   font-weight: 600;
   font-size: large;
+}
+
+/* Button Animation */
+.bt {
+  position: relative;
+  overflow: hidden;
+  padding-block: 10px;
+  padding-inline: 2rem;
+}
+
+.bt:active {
+  outline: none;
+}
+
+.bt::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+}
+
+.hoverShine::before {
+  left: -100%;
+  transition: all 0.65s ease-in-out;
+}
+
+.hoverShine:hover {
+  box-shadow: 1px 1px 5px 2px rgba(255, 255, 255, 0.5);
+}
+
+.hoverShine:hover::before {
+  left: 100%;
+}
+
+/* Infinite Animation, Delay has to be set as multiple of Animation*/
+.btnAnim::before {
+  /* animation: shine 0.5s ease-in-out infinite,
+    delay-animation2 4s linear infinite;*/
+  animation-delay: 3s;
+
+  animation: shine 1s ease-in-out infinite,
+    delay-animation10 10s ease-in-out infinite;
+}
+
+.btnAnim:hover {
+  box-shadow: 1px 1px 5px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* Button Shine animation */
+@keyframes shine {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+/* 2nd Animation for delay between Main Animation */
+
+/* Animation time = animation delay (2nd animation is 2-times the duration of main animation) */
+@keyframes delay-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  50.001% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* Animation time = 1/8 of animation delay (2nd animation is 8-times the duration of main animation) */
+@keyframes delay-animation2 {
+  0% {
+    opacity: 1;
+  }
+  12.5% {
+    opacity: 1;
+  }
+  12.501% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* Animation time = 1/10 = 10% of animation delay (2nd animation is 10-times the duration of main animation) */
+@keyframes delay-animation10 {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 1;
+  }
+  10.01% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* linear color transition animation Light Colors */
+@keyframes color-change {
+  0% {
+    color: white;
+  }
+  20% {
+    color: var(--l1);
+  }
+  40% {
+    color: var(--l2);
+  }
+  60% {
+    color: var(--l3);
+  }
+  80% {
+    color: var(--l4);
+  }
+  100% {
+    color: var(--l5);
+  }
+}
+/* linear color transition animation Dark Colors */
+@keyframes dark-color-change {
+  0% {
+    color: whitesmoke;
+  }
+  20% {
+    color: var(--d1);
+  }
+  40% {
+    color: var(--d2);
+  }
+  60% {
+    color: var(--d3);
+  }
+  80% {
+    color: var(--d4);
+  }
+  100% {
+    color: var(--d5);
+  }
+}
+/* linear color transition animation in reverse order Dark Colors */
+@keyframes dark-color-change-reverse {
+  0% {
+    color: var(--d5);
+  }
+  20% {
+    color: var(--d4);
+  }
+  40% {
+    color: var(--d3);
+  }
+  60% {
+    color: var(--d2);
+  }
+  80% {
+    color: var(--d1);
+  }
+  100% {
+    color: whitesmoke;
+  }
 }

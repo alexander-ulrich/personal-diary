@@ -36,7 +36,10 @@ function App() {
       <Header />
       <div className="flex flex-col items-center max-w-[1400px]">
         <h1 className="text-3xl font-bold underline">Personal Diary</h1>
-        <button className="btn my-15" onClick={() => setShowEntryModal(true)}>
+        <button
+          className="btn my-15 bt hoverShine btnAnim"
+          onClick={() => setShowEntryModal(true)}
+        >
           Add Diary Entry
         </button>
         <AddEntryModal

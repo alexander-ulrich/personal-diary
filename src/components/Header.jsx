@@ -1,8 +1,18 @@
-export default function Header({ setTheme }) {
-  function handleChange(value) {
-    //   setTheme(value);
-  }
+import { useEffect, useState } from "react";
+import {
+  getLocalStorageData,
+  setLocalStorageData,
+} from "../utils/localStorageData";
 
+export default function Header() {
+  const [theme, setTheme] = useState(getLocalStorageData("theme") ?? "default");
+  useEffect(() => {
+    setLocalStorageData("theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
+    document.querySelector("html").setAttribute("data-theme", theme);
+  }, []);
   return (
     <div className="flex flex-wrap mx-10 my-5">
       <div className="dropdown">
@@ -24,7 +34,7 @@ export default function Header({ setTheme }) {
         >
           <li>
             <input
-              onClick={handleChange("default")}
+              onClick={() => setTheme("default")}
               type="radio"
               name="theme-dropdown"
               className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
@@ -34,7 +44,7 @@ export default function Header({ setTheme }) {
           </li>
           <li>
             <input
-              onClick={handleChange("light")}
+              onClick={() => setTheme("light")}
               type="radio"
               name="theme-dropdown"
               className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
@@ -44,7 +54,7 @@ export default function Header({ setTheme }) {
           </li>
           <li>
             <input
-              onClick={handleChange("dark")}
+              onClick={() => setTheme("dark")}
               type="radio"
               name="theme-dropdown"
               className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
@@ -54,7 +64,7 @@ export default function Header({ setTheme }) {
           </li>
           <li>
             <input
-              onClick={handleChange("retro")}
+              onClick={() => setTheme("retro")}
               type="radio"
               name="theme-dropdown"
               className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
@@ -64,7 +74,7 @@ export default function Header({ setTheme }) {
           </li>
           <li>
             <input
-              onClick={handleChange("cyberpunk")}
+              onClick={() => setTheme("cyberpunk")}
               type="radio"
               name="theme-dropdown"
               className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
@@ -74,7 +84,7 @@ export default function Header({ setTheme }) {
           </li>
           <li>
             <input
-              onClick={handleChange("valentine")}
+              onClick={() => setTheme("valentine")}
               type="radio"
               name="theme-dropdown"
               className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
@@ -84,7 +94,7 @@ export default function Header({ setTheme }) {
           </li>
           <li>
             <input
-              onClick={handleChange("aqua")}
+              onClick={() => setTheme("aqua")}
               type="radio"
               name="theme-dropdown"
               className="theme-controller btn btn-sm btn-block btn-ghost justify-start"

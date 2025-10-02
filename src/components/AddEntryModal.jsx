@@ -11,25 +11,26 @@ async function action(_prevState, formData) {
   await sleep(1000);
   if (Object.keys(validationErrors).length === 0) {
     console.log("Submitted:", data);
+    const diary = (await getLocalStorageData("diary")) ?? [];
+
+    setLocalStorageData("diary", [data, ...diary]);
     alert("Diary Entry added successfully!");
-    return { errors: null, input: data };
+    return { errors: null, input: null, reset: true };
   }
-  return { errors: validationErrors, input: data };
+  return { errors: validationErrors, input: data, reset: false };
 }
 
 export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
   const [state, formAction, isPending] = useActionState(action, {
     errors: null,
     input: null,
+    reset: true,
   });
 
   useEffect(() => {
     async function saveData() {
-      const diary = (await getLocalStorageData("diary")) ?? [];
-      console.log("State of erros: " + state.errors);
-
-      if (state.errors === null && state.input !== null) {
-        setLocalStorageData("diary", [state?.input, ...diary]);
+      // if (state.errors === null && state.input !== null) {
+      if (state.reset) {
         setShowEntryModal(false);
       }
     }
@@ -111,7 +112,7 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
                 defaultValue={state.input?.content}
                 className={
                   !state.errors?.content
-                    ? "block textarea textarea-primary mb-20"
+                    ? "block textarea textarea-primary mb-15"
                     : "block textarea textarea-primary"
                 }
                 disabled={isPending}
@@ -122,7 +123,7 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
               ></textarea>
             </label>
             {state.errors?.content && (
-              <p className="text-red-600 font-semibold mb-20">
+              <p className="text-red-600 font-semibold mb-10">
                 {state.errors.content}
               </p>
             )}

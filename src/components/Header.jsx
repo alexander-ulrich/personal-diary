@@ -13,6 +13,7 @@ export default function Header() {
   useEffect(() => {
     document.querySelector("html").setAttribute("data-theme", theme);
   }, []);
+
   return (
     <div className="flex flex-wrap mx-10 my-5">
       <div className="dropdown">

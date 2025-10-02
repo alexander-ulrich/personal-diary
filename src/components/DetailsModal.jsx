@@ -26,7 +26,7 @@ export default function DetailsModal({ entry, setShowDetails, showDetails }) {
         <h2>{entry.title}</h2>
         <div className="overflow-auto">
           <textarea
-            className="w-full"
+            className="w-full resize-none"
             rows={10}
             disabled={true}
             value={entry.content}

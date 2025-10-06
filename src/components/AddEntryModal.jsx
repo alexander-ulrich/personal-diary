@@ -96,7 +96,7 @@ export default function AddEntryModal({ showEntryModal, setShowEntryModal }) {
                 defaultValue={
                   state.input?.img || "https://picsum.photos/600/200"
                 }
-                type="text"
+                type="url"
                 disabled={isPending}
                 className="input input-primary w-[50vw]"
                 name="img"
